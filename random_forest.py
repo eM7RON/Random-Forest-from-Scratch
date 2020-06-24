@@ -58,7 +58,7 @@ class RandomForestClassifier:
         for i in range(self.n_estimators):
             
             # take a random sample of 
-            idx = np.choice(indx_choices, n_sub_samples, replace=False)
+            idx = np.random.choice(indx_choices, n_sub_samples, replace=False)
             X_subset = X[idx]
             y_subset = y[idx]
 
@@ -84,9 +84,6 @@ class RandomForestClassifier:
         '''
         n_samples = len(X)
         predictions = np.empty([self.n_estimators, n_samples])
-
         for i in range(self.n_estimators):
-
             predictions[i] = self.forest[i].predict(X)
-
         return mode(predictions)[0][0].astype(int)
